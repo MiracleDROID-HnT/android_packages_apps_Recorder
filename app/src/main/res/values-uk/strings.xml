@@ -75,10 +75,15 @@
     <!-- Screen recorder notification overlay message -->
     <string name="screen_overlay_notif_message">Натисніть кнопку запису, щоб почати</string>
     <!-- Screen settings dialog title -->
+    <string name="screen_settings_title">Налаштування запису екрану</string>
     <!-- Screen recorder notification overlay channel title -->
+    <string name="screen_overlay_channel_title">Готово до запису екрану</string>
     <!-- Screen recorder notification overlay channel description-->
+    <string name="screen_overlay_channel_desc">Сповіщення, що показує готовність запису екрану</string>
     <!-- Screen recorder persistent notification channel title -->
+    <string name="screen_channel_title">Запис екрану</string>
     <!-- Screen recorder persistent notification channel description-->
+    <string name="screen_channel_desc">Постійне сповіщення при записі екрану і сповіщення після його завершення</string>
     <!-- Permissions -->
     <!-- Permissions dialog title -->
     <string name="dialog_permissions_title">Дозволи</string>
