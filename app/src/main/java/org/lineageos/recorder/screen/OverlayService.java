@@ -36,6 +36,7 @@ public class OverlayService extends Service {
             "screencast_overlay_notification_channel";
 
     public static final String EXTRA_HAS_AUDIO = "extra_audio";
+    public static final String EXTRA_HAS_AUDIO_SUBMIX = "extra_audio_submix";
     private final static int FG_ID = 123;
 
     /* Horrible hack to determine whether the service is running:
@@ -49,11 +50,13 @@ public class OverlayService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int id) {
         boolean hasAudio = intent != null && intent.getBooleanExtra(EXTRA_HAS_AUDIO, false);
+        boolean hasAudioSubMix = intent != null && intent.getBooleanExtra(EXTRA_HAS_AUDIO_SUBMIX, false);
 
         mLayer = new OverlayLayer(this);
         mLayer.setOnActionClickListener(() -> {
             Intent fabIntent = new Intent(ScreencastService.ACTION_START_SCREENCAST);
             fabIntent.putExtra(ScreencastService.EXTRA_WITHAUDIO, hasAudio);
+            fabIntent.putExtra(ScreencastService.EXTRA_WITHAUDIOSUBMIX, hasAudioSubMix);
             startService(fabIntent.setClass(this, ScreencastService.class));
             Utils.setStatus(getApplication(), Utils.UiStatus.SCREEN);
             onDestroy();

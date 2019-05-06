@@ -42,11 +42,13 @@ class RecordingDevice extends EncoderDevice {
             new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES),
                     "ScreenRecords");
     private final boolean mRecordAudio;
+    private final boolean mRecordAudioSubMix;
     private final File mPath;
 
-    RecordingDevice(Context context, int width, int height, boolean recordAudio) {
+    RecordingDevice(Context context, int width, int height, boolean recordAudio, boolean recordAudioSubMix) {
         super(context, width, height);
         mRecordAudio = recordAudio;
+        mRecordAudioSubMix = recordAudioSubMix;
         // Prepare all the output metadata
         String videoDate = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.getDefault())
                 .format(new Date());
@@ -160,8 +162,13 @@ class RecordingDevice extends EncoderDevice {
                 bufferSize = ((minBufferSize / 1024) + 1) * 1024 * 2;
             }
             Log.i(LOGTAG, "AudioRecorder init");
-            record = new AudioRecord(MediaRecorder.AudioSource.MIC, 44100,
-                    AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferSize);
+            if (mRecordAudioSubMix) {
+                record = new AudioRecord(MediaRecorder.AudioSource.REMOTE_SUBMIX, 44100,
+                        AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferSize);
+            } else {
+                record = new AudioRecord(MediaRecorder.AudioSource.MIC, 44100,
+                        AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferSize);
+            }
         }
 
         @Override

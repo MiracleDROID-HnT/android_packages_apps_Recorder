@@ -23,4 +23,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/screen_audio_message_off" />
+
+    <Switch
+        android:id="@+id/dialog_content_screen_settings_submix_switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/screen_audio_submix_message_off" />
 </LinearLayout>

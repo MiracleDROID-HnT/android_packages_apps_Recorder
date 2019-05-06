@@ -47,9 +47,11 @@
     <!-- Sound recorder notification channel description-->
     <!-- Screen recorder -->
     <!-- Screen recorder enabled audio message -->
-    <string name="screen_audio_message_on">Звук з мікрофону буде додано у відео</string>
+    <string name="screen_audio_message_on">Звук з мікрофону або мікшеру буде додано у відео (увімкніть перемикач, щоб використовувати мікшер)</string>
+    <string name="screen_audio_submix_message_on">Звук з мікшеру буде додано у відео</string>
     <!-- Screen recorder disabled audio message -->
-    <string name="screen_audio_message_off">Звук з мікрофону не буде додано у відео</string>
+    <string name="screen_audio_message_off">Звук з мікрофону або мікшеру не буде додано у відео</string>
+    <string name="screen_audio_submix_message_off">Звук з мікрофону буде додано у відео</string>
     <!-- Screen recorder disabled audio toggle message -->
     <string name="screen_audio_message_disabled">Під час запису екрану змінити ці налаштування неможливо</string>
     <!-- Screen recorder audio permission request card button -->

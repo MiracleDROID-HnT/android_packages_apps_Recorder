@@ -52,9 +52,11 @@
 
     <!-- Screen recorder -->
     <!-- Screen recorder enabled audio message -->
-    <string name="screen_audio_message_on">Audio from the microphone will be included in the video</string>
+    <string name="screen_audio_message_on">Audio from the microphone or submix will be included in the video (enable switch to use submix)</string>
+    <string name="screen_audio_submix_message_on">Audio from the submix will be included in the video</string>
     <!-- Screen recorder disabled audio message -->
-    <string name="screen_audio_message_off">Audio from microphone won\'t be included in the video</string>
+    <string name="screen_audio_message_off">Audio from microphone or submix won\'t be included in the video</string>
+    <string name="screen_audio_submix_message_off">Audio from the microphone will be included in the video</string>
     <!-- Screen recorder disabled audio toggle message -->
     <string name="screen_audio_message_disabled">It\'s not possible to change this setting while recording the screen</string>
     <!-- Screen recorder audio permission request card button -->

@@ -283,6 +283,7 @@ public class RecorderActivity extends AppCompatActivity implements
             new Handler().postDelayed(() -> {
                 Intent intent = new Intent(this, OverlayService.class);
                 intent.putExtra(OverlayService.EXTRA_HAS_AUDIO, isAudioAllowedWithScreen());
+                intent.putExtra(OverlayService.EXTRA_HAS_AUDIO_SUBMIX, isAudioSubMixAllowedWithScreen());
                 startService(intent);
                 onBackPressed();
             }, 500);
@@ -404,6 +405,10 @@ public class RecorderActivity extends AppCompatActivity implements
 
     private boolean isAudioAllowedWithScreen() {
         return mPrefs.getBoolean(Utils.PREF_SCREEN_WITH_AUDIO, false);
+    }
+
+    private boolean isAudioSubMixAllowedWithScreen() {
+        return mPrefs.getBoolean(Utils.PREF_SCREEN_WITH_AUDIO_SUBMIX, false);
     }
 
     private void setupConnection() {

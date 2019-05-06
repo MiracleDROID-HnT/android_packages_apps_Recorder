@@ -49,9 +49,11 @@
     <string name="sound_channel_desc">Постоянное уведомление при записи звука и уведомление после его завершения</string>
     <!-- Screen recorder -->
     <!-- Screen recorder enabled audio message -->
-    <string name="screen_audio_message_on">Звуки с микрофона будут записаны в видео</string>
+    <string name="screen_audio_message_on">Звуки с микрофона или микшера будут записаны в видео (включите переключатель, чтобы использовать микшер)</string>
+    <string name="screen_audio_submix_message_on">Звуки с микшера будут записаны в видео</string>
     <!-- Screen recorder disabled audio message -->
-    <string name="screen_audio_message_off">Звуки с микрофона не записываются</string>
+    <string name="screen_audio_message_off">Звуки с микрофона или микшера не записываются</string>
+    <string name="screen_audio_submix_message_off">Звуки с микрофона будут записаны в видео</string>
     <!-- Screen recorder disabled audio toggle message -->
     <string name="screen_audio_message_disabled">Во время записи экрана изменить эту настройку невозможно</string>
     <!-- Screen recorder audio permission request card button -->

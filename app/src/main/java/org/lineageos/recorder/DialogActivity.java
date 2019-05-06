@@ -50,6 +50,7 @@ public class DialogActivity extends AppCompatActivity implements
     private LinearLayout mRootView;
     private FrameLayout mContent;
     private Switch mAudioSwitch;
+    private Switch mAudioSubMixSwitch;
 
     private SharedPreferences mPrefs;
 
@@ -123,6 +124,9 @@ public class DialogActivity extends AppCompatActivity implements
         if (key.equals(Utils.PREF_SCREEN_WITH_AUDIO)) {
             mAudioSwitch.setText(getString(getScreenWithAudio() ?
                     R.string.screen_audio_message_on : R.string.screen_audio_message_off));
+        } else if (key.equals(Utils.PREF_SCREEN_WITH_AUDIO_SUBMIX)) {
+            mAudioSubMixSwitch.setText(getString(getScreenWithAudioSubMix() ?
+                    R.string.screen_audio_submix_message_on : R.string.screen_audio_submix_message_off));
         }
     }
 
@@ -170,13 +174,25 @@ public class DialogActivity extends AppCompatActivity implements
     private void setupAsSettingsScreen() {
         View view = createContentView(R.layout.dialog_content_screen_settings);
         mAudioSwitch = view.findViewById(R.id.dialog_content_screen_settings_switch);
+        mAudioSubMixSwitch = view.findViewById(R.id.dialog_content_screen_settings_submix_switch);
         mAudioSwitch.setOnCheckedChangeListener((button, isChecked) -> {
             if (hasAudioPermission()) {
                 setScreenWithAudio(isChecked);
+                mAudioSubMixSwitch.setEnabled(isChecked);
             } else if (isChecked) {
                 askAudioPermission();
             } else {
                 setScreenWithAudio(false);
+                mAudioSubMixSwitch.setEnabled(false);
+            }
+        });
+        mAudioSubMixSwitch.setOnCheckedChangeListener((button, isChecked) -> {
+            if (hasAudioPermission()) {
+                setScreenWithAudioSubMix(isChecked);
+            } else if (isChecked) {
+                askAudioPermission();
+            } else {
+                setScreenWithAudioSubMix(false);
             }
         });
 
@@ -184,10 +200,17 @@ public class DialogActivity extends AppCompatActivity implements
         mAudioSwitch.setChecked(isEnabled);
         mAudioSwitch.setText(getString(isEnabled ?
                 R.string.screen_audio_message_on : R.string.screen_audio_message_off));
+        boolean isEnabledSubMix = getScreenWithAudioSubMix();
+        mAudioSubMixSwitch.setChecked(isEnabledSubMix);
+        mAudioSubMixSwitch.setText(getString(isEnabledSubMix ?
+                R.string.screen_audio_submix_message_on : R.string.screen_audio_submix_message_off));
+        mAudioSubMixSwitch.setEnabled(isEnabled ? true : false);
 
         if (Utils.isScreenRecording(this)) {
             mAudioSwitch.setEnabled(false);
             mAudioSwitch.setText(getString(R.string.screen_audio_message_disabled));
+            mAudioSubMixSwitch.setEnabled(false);
+            mAudioSubMixSwitch.setText(getString(R.string.screen_audio_message_disabled));
         }
     }
 
@@ -212,5 +235,13 @@ public class DialogActivity extends AppCompatActivity implements
 
     private boolean getScreenWithAudio() {
         return mPrefs.getBoolean(Utils.PREF_SCREEN_WITH_AUDIO, false);
+    }
+
+    private void setScreenWithAudioSubMix(boolean enabled) {
+        mPrefs.edit().putBoolean(Utils.PREF_SCREEN_WITH_AUDIO_SUBMIX, enabled).apply();
+    }
+
+    private boolean getScreenWithAudioSubMix() {
+        return mPrefs.getBoolean(Utils.PREF_SCREEN_WITH_AUDIO_SUBMIX, false);
     }
 }

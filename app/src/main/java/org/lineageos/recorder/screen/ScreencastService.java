@@ -53,6 +53,7 @@ public class ScreencastService extends Service {
             "screencast_notification_channel";
 
     public static final String EXTRA_WITHAUDIO = "withaudio";
+    public static final String EXTRA_WITHAUDIOSUBMIX = "withaudiosubmix";
     public static final String ACTION_START_SCREENCAST =
             "org.lineageos.recorder.screen.ACTION_START_SCREENCAST";
     public static final String ACTION_STOP_SCREENCAST =
@@ -152,7 +153,7 @@ public class ScreencastService extends Service {
             }
 
             mStartTime = SystemClock.elapsedRealtime();
-            registerScreencaster(intent.getBooleanExtra(EXTRA_WITHAUDIO, false));
+            registerScreencaster(intent.getBooleanExtra(EXTRA_WITHAUDIO, false), intent.getBooleanExtra(EXTRA_WITHAUDIOSUBMIX, false));
             mBuilder = createNotificationBuilder();
             mTimer = new Timer();
             mTimer.scheduleAtFixedRate(new TimerTask() {
@@ -230,14 +231,14 @@ public class ScreencastService extends Service {
     }
 
 
-    private void registerScreencaster(boolean withAudio) {
+    private void registerScreencaster(boolean withAudio, boolean withAudioSubmix) {
         assert mRecorder == null;
         Point size = getNativeResolution();
         if (size == null) {
             return;
         }
 
-        mRecorder = new RecordingDevice(this, size.x, size.y, withAudio);
+        mRecorder = new RecordingDevice(this, size.x, size.y, withAudio, withAudioSubmix);
         VirtualDisplay vd = mRecorder.registerVirtualDisplay(this);
         if (vd == null) {
             cleanup();
